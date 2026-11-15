@@ -1,61 +1,45 @@
 import 'package:flutter/material.dart';
 
+class ItemHomepage {
+  final String name;
+  final IconData icon;
+  final Color color;
+
+  const ItemHomepage(this.name, this.icon, this.color);
+}
+
+const List<ItemHomepage> items = [
+  ItemHomepage("Load Project", Icons.folder, Colors.blue),
+  ItemHomepage("Add Project", Icons.add_circle, Colors.green),
+  ItemHomepage("Logout", Icons.logout, Colors.red),
+];
+
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String npm = "2506534163";
-  final String nama = "Zahra Nayla Azfa";
-  final String kelas = "PBP E";
-
-  final List<ItemHomepage> items = [
-    ItemHomepage("Load Project", Icons.folder),
-    ItemHomepage("Add Project", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
-  ];
-
-    @override
+  @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
     return Scaffold(
-      // AppBar menampilkan bar bagian atas halaman aplikasi.
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
+                InfoCard(title: 'NPM', content: '2506534163'),
+                InfoCard(title: 'Name', content: 'Zahra Nayla Azfa'),
+                InfoCard(title: 'Class', content: 'PBP E'),
               ],
             ),
-
             const SizedBox(height: 16.0),
-
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
             Center(
               child: Column(
                 children: [
@@ -69,19 +53,14 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
                   GridView.count(
                     primary: true,
                     padding: const EdgeInsets.all(20),
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
+                    children: items.map((item) => ItemCard(item)).toList(),
                   ),
                 ],
               ),
@@ -94,7 +73,6 @@ class MyHomePage extends StatelessWidget {
 }
 
 class InfoCard extends StatelessWidget {
-  // Kartu informasi yang menampilkan judul (title) dan isi (content).
   final String title;
   final String content;
 
@@ -103,13 +81,10 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Memberikan efek bayangan kartu elevasi 2 unit.
       elevation: 2.0,
       child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
         width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.all(16.0),
-        // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
             Text(
@@ -125,13 +100,6 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-
-  ItemHomepage(this.name, this.icon);
-}
-
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
 
@@ -140,17 +108,14 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
       color: Theme.of(context).colorScheme.secondary,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(content: Text('Kamu telah menekan tombol ${item.name}!')),
             );
         },
         child: Container(
@@ -159,11 +124,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
