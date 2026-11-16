@@ -1,92 +1,95 @@
 import 'package:flutter/material.dart';
 
+class ItemHomepage {
+  final String name;
+  final IconData icon;
+  final Color color;
+
+  const ItemHomepage(this.name, this.icon, this.color);
+}
+
+const List<ItemHomepage> items = [
+  ItemHomepage("Load Project", Icons.folder, Color(0xFFF7CAC9)),
+  ItemHomepage("Add Project", Icons.add_circle, Color(0xFF9DC3E8)),
+  ItemHomepage("Logout", Icons.logout, Colors.red),
+];
+
+// Gradient lembut: warna dari palet dicampur dengan putih, dengan bagian tengah putih lavender.
+const List<Color> backgroundGradient = [
+  Color(0xFFC7DEF2), // biru lembut (dari 8FBEE6)
+  Color(0xFFCFD8F0), // biru lavender (dari 9FB2E0)
+  Color(0xFFDBD6EE), // lavender (dari B7AEDD)
+  Color(0xFFF6F3FB), // putih lavender (tengah)
+  Color(0xFFE9D4EA), // lavender muda (dari D2A8D6)
+  Color(0xFFF4D4E1), // pink muda (dari EAA8C4)
+  Color(0xFFF7C4CF), // pink lembut (dari F0899F)
+];
+
+const List<double> backgroundStops = [0.0, 0.167, 0.333, 0.5, 0.667, 0.833, 1.0];
+
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String npm = "2506534163";
-  final String nama = "Zahra Nayla Azfa";
-  final String kelas = "PBP E";
-
-  final List<ItemHomepage> items = [
-    ItemHomepage("Load Project", Icons.folder),
-    ItemHomepage("Add Project", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
-  ];
-
-    @override
+  @override
   Widget build(BuildContext context) {
-    // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
     return Scaffold(
-      // AppBar menampilkan bar bagian atas halaman aplikasi.
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color(0xFF33415C),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: backgroundGradient,
+            stops: backgroundStops,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
-              ],
-            ),
-
-            const SizedBox(height: 16.0),
-
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
-            Center(
-              child: Column(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      'Selamat datang di MyPortfolio Mobile!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
-                  ),
+                  InfoCard(title: 'NPM', content: '2506534163'),
+                  InfoCard(title: 'Name', content: 'Zahra Nayla Azfa'),
+                  InfoCard(title: 'Class', content: 'PBP E'),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 16.0),
+              Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        'Selamat datang di MyPortfolio Mobile!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Color(0xFF33415C),
+                        ),
+                      ),
+                    ),
+                    GridView.count(
+                      primary: true,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 3,
+                      shrinkWrap: true,
+                      children: items.map((item) => ItemCard(item)).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -94,7 +97,6 @@ class MyHomePage extends StatelessWidget {
 }
 
 class InfoCard extends StatelessWidget {
-  // Kartu informasi yang menampilkan judul (title) dan isi (content).
   final String title;
   final String content;
 
@@ -103,33 +105,30 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // Memberikan efek bayangan kartu elevasi 2 unit.
+      color: const Color(0xFF67738C),
       elevation: 2.0,
       child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
         width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.all(16.0),
-        // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              style: const TextStyle(color: Colors.white),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-
-  ItemHomepage(this.name, this.icon);
 }
 
 class ItemCard extends StatelessWidget {
@@ -140,17 +139,15 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        // Aksi ketika kartu ditekan oleh pengguna.
+        borderRadius: BorderRadius.circular(12),
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(content: Text('Kamu telah menekan tombol ${item.name}!')),
             );
         },
         child: Container(
@@ -159,16 +156,15 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
