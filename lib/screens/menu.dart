@@ -14,6 +14,7 @@ class ItemHomepage {
 const List<ItemHomepage> items = [
   ItemHomepage("Load Project", Icons.folder, Color(0xFFF7CAC9)),
   ItemHomepage("Add Project", Icons.add_circle, Color(0xFF9DC3E8)),
+  ItemHomepage("Add Experience", Icons.work, Color(0xFFB5EAD7)),
   ItemHomepage("Logout", Icons.logout, Colors.red),
 ];
 
