@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/experience_form.dart';
 
 
 class LeftDrawer extends StatelessWidget {
@@ -37,7 +38,7 @@ class LeftDrawer extends StatelessWidget {
                 ],
               ),
           ),
-          
+
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
@@ -46,7 +47,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) => const MyHomePage(),
                 ),
               );
             },
@@ -61,6 +62,20 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ProjectFormPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.work_outline),
+            title: const Text('Add Experience'),
+            // Navigasi ke halaman tambah pengalaman
+            onTap: () {
+              Scaffold.of(context).closeDrawer();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExperienceFormPage(),
                 ),
               );
             },

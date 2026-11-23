@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/experience_form.dart';
 
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
@@ -22,14 +23,21 @@ class ItemCard extends StatelessWidget {
                 content: Text('Kamu telah menekan tombol ${item.name}!')
               ),
             );
-          
+
           // Navigate ke halaman yang sesuai
           if (item.name == "Add Project") {
             Navigator.push(
-              context, 
+              context,
               MaterialPageRoute(
                 builder: (context) => const ProjectFormPage(),
-              ),  
+              ),
+            );
+          } else if (item.name == "Add Experience") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ExperienceFormPage(),
+              ),
             );
           }
         },
