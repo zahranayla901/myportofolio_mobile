@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ExperienceFormPage extends StatefulWidget {
@@ -111,11 +111,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Experience Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Experience Form')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
@@ -142,12 +138,8 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                       _position = value ?? "";
                     });
                   },
-                  validator: (String? value) => _validateText(
-                    value,
-                    label: "Posisi",
-                    min: 3,
-                    max: 60,
-                  ),
+                  validator: (String? value) =>
+                      _validateText(value, label: "Posisi", min: 3, max: 60),
                 ),
               ),
 
@@ -188,10 +180,10 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   ),
                   initialValue: _employmentType,
                   items: _employmentTypes
-                      .map((type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type),
-                          ))
+                      .map(
+                        (type) =>
+                            DropdownMenuItem(value: type, child: Text(type)),
+                      )
                       .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
@@ -216,8 +208,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  validator: (_) =>
-                      _startDate == null ? "Tanggal mulai harus dipilih!" : null,
+                  validator: (_) => _startDate == null
+                      ? "Tanggal mulai harus dipilih!"
+                      : null,
                 ),
               ),
 
