@@ -38,7 +38,8 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
       return isRequired ? 'URL tidak boleh kosong!' : null;
     }
     final uri = Uri.tryParse(text);
-    final isValid = uri != null &&
+    final isValid =
+        uri != null &&
         (uri.scheme == 'http' || uri.scheme == 'https') &&
         uri.host.isNotEmpty;
     return isValid
@@ -139,9 +140,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         onChanged: onChanged,
         validator: validator,
@@ -188,10 +187,8 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                 label: 'Teknologi yang Digunakan',
                 hint: 'Contoh: Flutter, Django, Figma',
                 onChanged: (value) => _technology = value,
-                validator: (value) => _validateRequired(
-                  value,
-                  'Teknologi tidak boleh kosong!',
-                ),
+                validator: (value) =>
+                    _validateRequired(value, 'Teknologi tidak boleh kosong!'),
               ),
               _textField(
                 label: 'Tautan Proyek',

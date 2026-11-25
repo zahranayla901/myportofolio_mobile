@@ -20,7 +20,7 @@ class ItemCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text('Kamu telah menekan tombol ${item.name}!')
+                content: Text('Kamu telah menekan tombol ${item.name}!'),
               ),
             );
 
@@ -28,9 +28,7 @@ class ItemCard extends StatelessWidget {
           if (item.name == "Add Project") {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ProjectFormPage(),
-              ),
+              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
             );
           } else if (item.name == "Add Experience") {
             Navigator.push(

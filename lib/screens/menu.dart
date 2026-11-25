@@ -33,7 +33,15 @@ const List<Color> backgroundGradient = [
   Color(0xFFF7C4CF),
 ];
 
-const List<double> backgroundStops = [0.0, 0.167, 0.333, 0.5, 0.667, 0.833, 1.0];
+const List<double> backgroundStops = [
+  0.0,
+  0.167,
+  0.333,
+  0.5,
+  0.667,
+  0.833,
+  1.0,
+];
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -122,10 +130,7 @@ class InfoCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8.0),
-            Text(
-              content,
-              style: const TextStyle(color: Colors.white),
-            ),
+            Text(content, style: const TextStyle(color: Colors.white)),
           ],
         ),
       ),
@@ -198,7 +203,5 @@ Future<void> _openGuarded(BuildContext context, Widget page) async {
   final loggedIn = await ensureLoggedIn(context);
   if (!loggedIn) return;
 
-  navigator.push(
-    MaterialPageRoute(builder: (_) => page),
-  );
+  navigator.push(MaterialPageRoute(builder: (_) => page));
 }

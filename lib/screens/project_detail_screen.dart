@@ -12,10 +12,7 @@ class ProjectDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          project.title,
-          style: const TextStyle(color: Colors.white),
-        ),
+        title: Text(project.title, style: const TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF33415C),
         foregroundColor: Colors.white,
       ),
@@ -42,10 +39,7 @@ class ProjectDetailScreen extends StatelessWidget {
             ],
             Text(
               project.title,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text('Teknologi: ${project.technology}'),

@@ -34,9 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
       final message = (error.statusCode == 400 || error.statusCode == 401)
           ? 'Username atau password salah.'
           : 'Login gagal (${error.statusCode}).';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     } on Exception {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
